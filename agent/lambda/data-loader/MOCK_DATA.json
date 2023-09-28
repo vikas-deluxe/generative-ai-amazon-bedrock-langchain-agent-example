@@ -1,7 +1,7 @@
 [
   {
     "userName": "Demo User",
-    "planName": "Mortgage",
+    "planName": "Deluxe - Mortgage",
     "amountDue": 3325,
     "dueDate": "2023-09-01",
     "loanAmount": 640000,
@@ -11,5 +11,31 @@
     "pin": 1234,
     "prefix": "Mr",
     "planId": "d7edc887-f09f"
+  },
+  {
+    "userName": "Vikas Mehta",
+    "planName": "Deluxe - Mortgage",
+    "amountDue": 2301,
+    "dueDate": "2023-11-01",
+    "loanAmount": 365000,
+    "loanDuration": 30,
+    "loanInterest": 2.500,
+    "unpaidPrincipal": 260000,
+    "pin": 4589,
+    "prefix": "Mr",
+    "planId": "d7edc887-f091"
+  },
+  {
+    "userName": "Pankaj Gupta",
+    "planName": "Deluxe - Mortgage",
+    "amountDue": 3475,
+    "dueDate": "2023-11-01",
+    "loanAmount": 615000,
+    "loanDuration": 30,
+    "loanInterest": 3.15,
+    "unpaidPrincipal": 250000,
+    "pin": 3285,
+    "prefix": "Mr",
+    "planId": "d7edc887-f092"
   }
 ]

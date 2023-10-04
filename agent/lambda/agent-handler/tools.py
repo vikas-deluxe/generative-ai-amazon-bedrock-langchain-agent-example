@@ -16,9 +16,9 @@ class Tools():
         print("Initializing Tools")
         self.tools = [
             Tool(
-                name="Octank Financial",
+                name="Deluxe Corporation Financial",
                 func=self.chain_tool,
-                description="Use this tool to answer questions about Octank Financial.",
+                description="Use this tool to answer questions about Deluxe Corporation.",
             )
         ]
 

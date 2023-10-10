@@ -112,7 +112,7 @@ def elicit_intent(intent_request, session_attributes, message):
                     "buttons": [
                         {
                             "text": "Ask chat buddy",
-                            "value": "Brief explanation of Product Architecture Group from Deluxe?"
+                            "value": "What kind of questions can chat buddy answer?"
                         }
                     ],
                     "title": "How can I help you?"

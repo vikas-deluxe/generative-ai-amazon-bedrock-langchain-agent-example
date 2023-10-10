@@ -1,7 +1,7 @@
 [
   {
     "userName": "Demo User",
-    "planName": "Deluxe - Mortgage",
+    "planName": "Mortgage",
     "amountDue": 3325,
     "dueDate": "2023-09-01",
     "loanAmount": 640000,
@@ -14,7 +14,7 @@
   },
   {
     "userName": "Vikas Mehta",
-    "planName": "Deluxe - Mortgage",
+    "planName": "Mortgage",
     "amountDue": 2301,
     "dueDate": "2023-11-01",
     "loanAmount": 365000,
@@ -27,7 +27,7 @@
   },
   {
     "userName": "Pankaj Gupta",
-    "planName": "Deluxe - Mortgage",
+    "planName": "Mortgage",
     "amountDue": 3475,
     "dueDate": "2023-11-01",
     "loanAmount": 615000,

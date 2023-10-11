@@ -855,8 +855,6 @@ def invoke_fm(intent_request):
     Invokes Foundational Model endpoint hosted on Amazon Bedrock and parses the response.
     """
     prompt = intent_request['inputTranscript']
-    prompt = f"\n\nHuman: {prompt}\n\nAssistant:"   
-
     #print("prompt text for bedrock " + str(prompt))
 
     chat = Chat(prompt)
@@ -874,6 +872,8 @@ def invoke_fm(intent_request):
             raise e
         message = message.removeprefix("Could not parse LLM output: `").removesuffix("`")
         return message
+
+    print("agent execution message, " + str(message))
 
     output = message['output']
 
@@ -903,11 +903,11 @@ def dispatch(intent_request):
     username = slots['UserName'] if 'UserName' in slots else None
     intent_name = intent_request['sessionState']['intent']['name']
 
+    print("intent request , " + str(intent_request))
     if intent_name == 'VerifyIdentity':
         return verify_identity(intent_request)
     elif intent_name == 'LoanApplication':
         #print("slots , " + str(slots))
-        print("intent request , " + str(intent_request))
         return loan_application(intent_request)
     elif intent_name == 'LoanCalculator':
         return loan_calculator(intent_request)

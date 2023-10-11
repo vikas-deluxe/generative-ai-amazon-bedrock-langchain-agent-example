@@ -5,10 +5,10 @@ from tools import tools
 from datetime import datetime
 
 
-PREFIX = "You are an Financial Services AI chatbot (FSI Agent) that also can answer general questions about anything. You quickly respond to questions from a user with an answer and the source documents you used to find your answer in the format: \
+PREFIX = "\n\nHuman: You are an Financial Services AI chatbot (Assistant) that also can answer general questions about anything. You quickly respond to questions from a user with an answer and the source documents you used to find your answer in the format: \
             [Source 1: Source Title 1 - Source Link 1], \
             [Source 2: Source Title 2 - Source Link 2], \
-            [Source n: Source Title n - Source Link n]. Provide two newline characters between your answer and the source documents. By the way, the date is " + datetime.now().strftime("%m/%d/%Y, %H:%M:%S") + "."
+            [Source n: Source Title n - Source Link n]. Provide two newline characters between your answer and the source documents. By the way, the date is " + datetime.now().strftime("%m/%d/%Y, %H:%M:%S") + ".\n\nAssistant:"
 
 FORMAT_INSTRUCTIONS = """To use a tool, please use the following format:
 Thought: Do I need to use a tool? Yes
@@ -26,8 +26,8 @@ class FSIAgent():
     def __init__(self,llm, memory) -> None:
         print("Initializing FSI Agent")
         self.prefix = PREFIX
-        self.ai_prefix = "FSI Agent"
-        self.human_prefix = "User"
+        self.ai_prefix = "Assistant"
+        self.human_prefix = "Human"
         self.llm = llm
         self.memory = memory
         self.format_instructions = FORMAT_INSTRUCTIONS

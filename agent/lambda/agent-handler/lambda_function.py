@@ -426,7 +426,8 @@ def verify_identity(intent_request):
                 items = response['Items']
                 for item in items:
                     if item['planName'] == 'mortgage' or item['planName'] == 'Mortgage':
-                        message = "Your mortgage account summary includes a ${:,} loan at {}% interest with ${:,} of unpaid principal. Your next payment of ${:,} is scheduled for {}.".format(item['loanAmount'], item['loanInterest'], item['unpaidPrincipal'], item['amountDue'], item['dueDate'])
+                        #message = "Your mortgage account summary includes a ${:,} loan at {}% interest with ${:,} of unpaid principal. Your next payment of ${:,} is scheduled for {}.".format(item['loanAmount'], item['loanInterest'], item['unpaidPrincipal'], item['amountDue'], item['dueDate'])
+                        message = "Your order of ${:,} is scheduled for delivery on {}.".format(item['amountDue'], item['dueDate'])
                     elif item['planName'] == 'Checking' or item['planName'] == 'checking':
                         message = "I see you have a Savings account with Octank Financial. Your account balance is ${:,} and your next payment \
                             amount of ${:,} is scheduled for {}.".format(item['unpaidPrincipal'], item['paymentAmount'], item['dueDate'])
@@ -855,13 +856,22 @@ def invoke_fm(intent_request):
     Invokes Foundational Model endpoint hosted on Amazon Bedrock and parses the response.
     """
     prompt = intent_request['inputTranscript']
+    #prompt = f"\n\nHuman: {prompt}\n\nAssistant:"   
+
     #print("prompt text for bedrock " + str(prompt))
 
     chat = Chat(prompt)
+    
     llm = Bedrock(
-        model_id="anthropic.claude-instant-v1"
-    )  
-    llm.model_kwargs = {'max_tokens_to_sample': 200}
+            model_id="anthropic.claude-instant-v1"
+            #model_id="anthropic.claude-v2"
+        )  
+    llm.model_kwargs = {'max_tokens_to_sample': 1024, 'temperature': 0.1} 
+        
+    #llm = Bedrock(
+    #    model_id="anthropic.claude-instant-v1"
+    #)  
+    #llm.model_kwargs = {'max_tokens_to_sample': 200}
     lex_agent = FSIAgent(llm, chat.memory)
 
     try:
@@ -872,10 +882,22 @@ def invoke_fm(intent_request):
             raise e
         message = message.removeprefix("Could not parse LLM output: `").removesuffix("`")
         return message
-
-    print("agent execution message, " + str(message))
+        
+    print("agent execution message, " + str(message))    
 
     output = message['output']
+    
+    #sources = f"\n\n"
+    
+    print("intermediate step, " + str(message['intermediate_steps']))
+    
+    if 'source_documents' in message['intermediate_steps']:
+        print("source documents exit in message body")   
+    #    for d in message['intermediate_steps']['source_documents']:
+    #        sources += f"\n\n" + (d.metadata['source'])
+    #    print("Sources: ", + str(sources) )    
+    
+    #output += sources
 
     return output
 
@@ -904,6 +926,7 @@ def dispatch(intent_request):
     intent_name = intent_request['sessionState']['intent']['name']
 
     print("intent request , " + str(intent_request))
+    
     if intent_name == 'VerifyIdentity':
         return verify_identity(intent_request)
     elif intent_name == 'LoanApplication':

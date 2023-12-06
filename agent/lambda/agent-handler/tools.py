@@ -29,8 +29,9 @@ class Tools():
 
         llm = Bedrock(
             model_id="anthropic.claude-instant-v1"
+            #model_id="anthropic.claude-v2"
         )  
-        llm.model_kwargs = {'max_tokens_to_sample': 200} 
+        llm.model_kwargs = {'max_tokens_to_sample': 1024, 'temperature': 0.1} 
 
         retriever = KendraIndexRetriever(
             kendraindex=kendra_index_id, 
